@@ -16,13 +16,14 @@ def insere_detalhes_filme(data_inicial, data_final):
     keywords_list = []
     detalhes_filmes_list = []
 
+    #production_companies_list.clear()
+    #production_countries_list.clear()
+    #keywords_list.clear()
+    #detalhes_filmes_list.clear()
+    
     count = 1
     for id in filmes['id']:
         print(f"Processando detalhes de filmes...")
-
-        production_companies_list.clear()
-        production_countries_list.clear()
-        keywords_list.clear()
 
         url = f"{URL_BASE}{id}?language=pt-BR"
         movie_data = requisicao_api(url)
@@ -67,15 +68,16 @@ def insere_detalhes_filme(data_inicial, data_final):
                                            'data_dados': datetime.now().strftime('%Y-%m-%d %H:%M:%S')
                                            })
 
-            print(f"Processando ID {id} ({count}/{len(movie_data)})")
+            print(f"Processando ID {id} ({count}/{len(filmes['id'])})")
             count += 1    
-        if (len(detalhes_filmes_list) > 0 ):
-            merge_detalhes_filmes_snowflake(pd.DataFrame(detalhes_filmes_list), 'temp_detalhes_filme')
-        if (len(production_companies_list) > 0 ):
-            salvar_produtora_snowflake(pd.DataFrame(production_companies_list), 'temp_companies')
-        if (len(production_countries_list) > 0 ):
-            salvar_pais_producao_snowflake(pd.DataFrame(production_countries_list), 'temp_countries')
-        if(len(keywords_list) > 0):
-            salvar_palavras_chave_snowflake(pd.DataFrame(keywords_list), 'temp_keywords')
+    
+    if (len(detalhes_filmes_list) > 0 ):
+        merge_detalhes_filmes_snowflake(pd.DataFrame(detalhes_filmes_list), 'temp_detalhes_filme')
+    if (len(production_companies_list) > 0 ):
+        salvar_produtora_snowflake(pd.DataFrame(production_companies_list), 'temp_companies')
+    if (len(production_countries_list) > 0 ):
+        salvar_pais_producao_snowflake(pd.DataFrame(production_countries_list), 'temp_countries')
+    if(len(keywords_list) > 0):
+        salvar_palavras_chave_snowflake(pd.DataFrame(keywords_list), 'temp_keywords')
 
     print("Processamento concluído com sucesso!")

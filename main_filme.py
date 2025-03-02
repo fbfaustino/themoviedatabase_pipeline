@@ -4,7 +4,7 @@ from datetime import datetime, timedelta
 
 def main():
     pagina = 1
-    minus_data = datetime.today() - timedelta(days=5)
+    minus_data = datetime.today() - timedelta(days=2)
     data_inicial = minus_data.strftime("%Y-%m-%d")
     data_final = datetime.today().strftime("%Y-%m-%d")
 
