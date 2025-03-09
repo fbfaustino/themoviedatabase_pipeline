@@ -15,11 +15,6 @@ def insere_detalhes_filme(data_inicial, data_final):
     production_countries_list = []
     keywords_list = []
     detalhes_filmes_list = []
-
-    #production_companies_list.clear()
-    #production_countries_list.clear()
-    #keywords_list.clear()
-    #detalhes_filmes_list.clear()
     
     count = 1
     for id in filmes['id']:
