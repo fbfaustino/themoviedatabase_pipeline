@@ -1,7 +1,5 @@
-import requests
 import pandas as pd
 import calendar
-import time
 from config.conexao import *
 from models.filme_model import *
 from datetime import datetime, timedelta
